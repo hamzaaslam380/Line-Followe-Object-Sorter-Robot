@@ -38,7 +38,7 @@ int gripperPin = 6;
 #define ECHO_PIN     2   //Echo pin is an Output pin
 #define MAX_DISTANCE 100
 
-Servo gripper;
+Servo gripper; // take Servo library objects and use for our gripper
 Servo groundGripper;
 Servo upperGroundGripper;
 Servo rotationGripper;
@@ -50,7 +50,7 @@ NewPing sonar(TRIGGER_PIN, ECHO_PIN, MAX_DISTANCE); // use newping library for a
 String val,num;  // val variable is to get value from bluetoth app and give command to arduino manually
 float distance;
 
-int val1;
+int val1; // get servo position and then write in servo 
 
 void setup() {
 
@@ -81,13 +81,13 @@ void setup() {
 void loop(){
 
 	int i; 
-	pixy.ccc.getBlocks();
+	pixy.ccc.getBlocks(); // intialize pixy and get detected objects
 	
-	manualRobotMovement();
+	manualRobotMovement(); // use to control movements by andriod app
   
-	detectAndArrangeObjects();
+	detectAndArrangeObjects(); // detect both objects and pick place 
 	
-	lineFollowerRobot();
+	lineFollowerRobot(); // line follower robot commands
   
 }
 
@@ -130,7 +130,7 @@ void detectAndArrangeObjects(){
 			int h = pixy.ccc.blocks[0].m_height;
 				
 			if(pixy.ccc.getBlocks()== 1 && pixy.ccc.blocks[0].m_signature == 1 && h < tomato_height && h > (tomato_height-15) && w < tomato_width && w > (tomato_width-15)){ 
-				
+  
 				// if it detect object it return 1 then we check which object for tomotoas we set signature 1
 					
 				moveGroundGripper(120,0); // move servos to pick tomatos
